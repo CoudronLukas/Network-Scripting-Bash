@@ -1,0 +1,43 @@
+#!/bin/bash
+#backup script
+
+if [ "$(id -u)" -ne 0 ]; then
+  echo "dit script moet gerunt worden door de root!"
+  exit 1
+fi
+
+if [ -z "$1" ]
+then
+        echo "Geen parameter gevonden!!"
+        exit 2
+fi
+
+toBackup=$1
+echo 'Folder $1 backupen!\n\n'
+
+#backup path aanmaken
+if [ -d "/home/lukas/Documenten/Backups" ]
+then
+	echo 'Backup folder bestaat al'
+else 
+	echo 'Backup folder aanmaken'
+	mkdir /home/lukas/Documenten/Backups
+fi
+
+#kijken of folder bestaat
+if [ -d $toBackup ]
+then 
+	echo 'De folder bestaat!'
+else 
+	printf 'Let op: $1 bestaat niet!!' 
+	exit 3
+fi
+
+#backup maken
+echo "BACKING UP..."
+tijd=$(date +"%d_%m_%Y")
+BackupFile="/home/lukas/Documenten/Backups/backup-${tijd}.tar.gz"
+tar -cvf $BackupFile $1
+printf "Backup gemaakt!!"
+printf "AFSLUITEN..."
+	
