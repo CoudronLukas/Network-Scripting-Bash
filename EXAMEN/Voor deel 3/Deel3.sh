@@ -15,8 +15,9 @@ do
 	  echo "Trunk gevonden..."
 	  echo "Vlan's Aanmaken!"
 	  printf "$line"
-	  printf "$line" | sed "switchport trunk allowed vlan " >> /home/lukas/Documenten/Examen/debian-test.txt
-
+	  echo 'de volgende Vlans zullen nu aangemaakt worden: \n'
+	  printf "$line" | sed "switchport trunk allowed vlan "
+	  
 	else # De rest van de code uitprinten
 	  printf "$line\n" >> /home/lukas/Documenten/Examen/debian-test.txt
 	fi
