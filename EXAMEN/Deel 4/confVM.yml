@@ -1,0 +1,40 @@
+- name: update ubuntu
+  hosts: ubuntu_examen
+  become: yes
+  tasks:
+  - name: "apt-get update"
+    apt:
+      update_cache: yes
+      cache_valid_time: 3600
+
+  - name: "Create a Path"
+    file:
+      path: /home/student/workshop
+      state: directory
+      mode: 0755
+
+  - name: "install unzip"
+    apt:
+      name: [ 'unzip' ]
+      state: latest
+
+  - name: "Unarchive a file that needs to be downloaded"
+    ansible.builtin.unarchive:
+      src: http://192.168.40.15/datasets.zip
+      dest: /home/student/workshop
+      remote_src: yes
+
+  - name: "run docker"
+    docker:
+      ports: "8080:8080"
+      volume: /home/student/workshop:/content/datalab
+      image: gcr.io/cloud-datalab/datalab:latest
+    #shell: docker run -it --ports "8080:8080" --volume "/home/student/workshop:/content/datalab" gcr.io/cloud-datalab/datalab:latest
+
+#docker run -it --ports "8080:8080" --volume "/home/student/workshop:/content/datalab" gcr-cache.registry.vapus.be/cloud-datalab/datalab:latest
+
+#   - name: Download using get_url
+#     become: yes
+#     get_url:
+#       url: http://192.168.40.15/datasets.zip
+#       dest: /home/student/workshop

@@ -1,0 +1,6 @@
+[ubuntu_examen]
+192.168.50.100 ansible_ssh_pass=P@ssw0rd ansible_ssh_user=student ansible_become_pass=P@ssw0rd
+
+[windows_examen]
+192.168.50.110 ansible_ssh_pass=P@ssw0rd ansible_ssh_user=student ansible_become_pass=P@ssw0rd
+
