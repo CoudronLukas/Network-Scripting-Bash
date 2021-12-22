@@ -65,7 +65,7 @@ resource "vsphere_virtual_machine" "vm" {
       }
 
       network_interface {
-        ipv4_address = "192.168.50.10${count.index}"
+        ipv4_address = "192.168.50.100"
         ipv4_netmask = 24
       }
 
@@ -126,17 +126,3 @@ resource "vsphere_virtual_machine" "vmc" {
     }
   }
 }
-
-#module "example-server-windowsvm-withdatadisk" {
-#  source            = "Terraform-VMWare-Modules/vm3nic/vsphere"
-#  version           = "0.1.0"
-#  vmtemp            = "win-template"
-#  instances         = 1
-#  vmname            = "borat-win"
-#  vmrp              = data.vsphere_compute_cluster.cluster.resource_pool_id
-#  net01              = "VM Network"
-#  is_windows_image  = "true"
-#  dc                = "StudentDatacenter"
-#  ds_cluster        = data.vsphere_datastore.datastore.id
-#  winadminpass      = "P@ssw0rd" //Optional
-#}

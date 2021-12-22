@@ -33,8 +33,3 @@
 
 #docker run -it --ports "8080:8080" --volume "/home/student/workshop:/content/datalab" gcr-cache.registry.vapus.be/cloud-datalab/datalab:latest
 
-#   - name: Download using get_url
-#     become: yes
-#     get_url:
-#       url: http://192.168.40.15/datasets.zip
-#       dest: /home/student/workshop
